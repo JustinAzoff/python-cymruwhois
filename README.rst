@@ -9,3 +9,6 @@ Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
     15169
     >>> print r.owner
     GOOGLE - Google Inc.
+
+
+See http://packages.python.org/cymruwhois/ for full documentation.
