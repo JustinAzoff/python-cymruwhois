@@ -9,4 +9,4 @@ released versions are available for download at the `Python Package Index <http:
 
 Source
 ------
-The latest source code is avialable at the `githug project page <http://github.com/JustinAzoff/python-cymruwhois/tree/master>`_.
+The latest source code is avialable at the `github project page <http://github.com/JustinAzoff/python-cymruwhois/tree/master>`_.
