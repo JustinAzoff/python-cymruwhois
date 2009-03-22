@@ -19,7 +19,9 @@ Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
 
     """,
 
-    url="http://github.com/JustinAzoff/python-cymruwhois/tree/master",
+    url="http://packages.python.org/cymruwhois/",
+    download_url="http://github.com/JustinAzoff/python-cymruwhois/tree/master",
+    license='MIT',
     classifiers=[
         "Topic :: System :: Networking",
         "Environment :: Console",

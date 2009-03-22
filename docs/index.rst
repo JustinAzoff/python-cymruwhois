@@ -11,17 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-.. warning::
-    Do not call the Client.lookup function inside of a loop, the performance
-    will be terrible.  Instead, call lookupmany or lookupmany_dict
-
-
-Cymruwhois
-----------
-
-.. autoclass:: cymruwhois.Client
-   :members: lookup,lookupmany,lookupmany_dict
-   :undoc-members:
+   about
+   command_line
+   api
 
 
 Indices and tables

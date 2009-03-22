@@ -1,4 +1,10 @@
 #!/usr/bin/env python
+# cymruwhois.py
+# Copyright (C) 2009 Justin Azoff JAzoff@uamail.albany.edu
+#
+# This module is released under the MIT License:
+# http://www.opensource.org/licenses/mit-license.php
+
 import socket
 import errno
 
@@ -145,8 +151,12 @@ class Client:
         self.c.set(self.KEY_FMT % r.ip, r, 60*60*6)
 
     def lookup(self, ip):
-        """Look up a single address.  This function should not be called in 
-        loop, instead call lookupmany"""
+        """Look up a single address. 
+        
+        .. warning::
+            Do not call this function inside of a loop, the performance
+            will be terrible.  Instead, call lookupmany or lookupmany_dict
+        """
         return list(self.lookupmany([ip]))[0]
     
     def lookupmany(self, ips):
