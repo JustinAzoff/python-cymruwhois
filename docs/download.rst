@@ -1,10 +1,8 @@
-About
-=====
+Downloading
+===========
 
-cymruwhois is a python library for interfacing with the whois.cymru.com service.
-
-Get it
-------
+Releases
+--------
 released versions are available for download at the `Python Package Index <http://pypi.python.org/pypi/cymruwhois/1.0>`_.
 
 Source

@@ -5,15 +5,16 @@
 
 Welcome to cymruwhois's documentation!
 ======================================
+cymruwhois is a python library for interfacing with the whois.cymru.com service.
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
-   about
-   command_line
    api
+   command_line
+   download
 
 
 Indices and tables
