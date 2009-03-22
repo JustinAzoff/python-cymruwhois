@@ -1,0 +1,58 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH CYMRUWHOIS 1 "February 26, 2009"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+cymruwhois \- program to lookup ip addresses using the cymru whois service
+.SH SYNOPSIS
+.B cymruwhois
+.RI [ options ] " files" ...
+.br
+.SH DESCRIPTION
+This manual page documents briefly the
+.B cymruwhois
+command.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+\fBcymruwhois\fP is a program that...
+.SH OPTIONS
+This program follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-d DELIM, \-\-delim=DELIM
+delimiter to use instead of justified
+.TP
+.B \-f FIELDS, \-\-fields=FIELDS
+comma separated fields to include (asn,ip,prefix,cc,owner)
+.TP
+.B \-c CACHE, \-\-cache=CACHE
+memcache server (default localhost)
+.TP
+.B \-n, \-\-no-cache
+don't use memcached
+.SH SEE ALSO
+.BR whois (1),
+.br
+.SH AUTHOR
+cymruwhois was written by Justin Azoff <JAzoff@uamail.albany.edu>
+.PP
+This manual page was written by Justin Azoff <JAzoff@uamail.albany.edu>
+for the Debian project (but may be used by others).
