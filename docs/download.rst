@@ -3,7 +3,7 @@ Downloading
 
 Releases
 --------
-released versions are available for download at the `Python Package Index <http://pypi.python.org/pypi/cymruwhois/1.0>`_.
+released versions are available for download at the `Python Package Index <http://pypi.python.org/pypi/cymruwhois>`_.
 
 Source
 ------
