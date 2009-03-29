@@ -16,7 +16,7 @@ Lookups can be done from stdin or from files::
     12306    82.98.86.176    82.98.64.0/18      DE PLUSLINE Plus.Line AG IP-Services
 
 
-The formatting of contents of the output can be controlled with the -f and -d options::
+The formatting and contents of the output can be controlled with the -f and -d options::
 
     justin@dell ~ % cymruwhois /tmp/ips -f asn,cc
     15169    US
