@@ -42,4 +42,9 @@ Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
             'cymruwhois   = cymruwhois:lookup_stdin',
         ]
     },
+    setup_requires=[
+        "nose",
+        "sphinx",
+    ],
+    test_suite='nose.collector',
 )
