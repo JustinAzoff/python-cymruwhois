@@ -201,7 +201,7 @@ class Client:
     def lookupmany_dict(self, ips):
         """Look up many ip addresses, returning a dictionary of ip -> record"""
         ips = set(ips)
-        return dict((r.ip, r) for r in self.lookupmany(ips))
+        return dict((r.key, r) for r in self.lookupmany(ips))
                 
     def _lookupmany_raw(self, ips):
         """Do a look up for some ips"""
