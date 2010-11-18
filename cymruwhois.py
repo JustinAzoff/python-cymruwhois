@@ -56,10 +56,32 @@ class record:
         self.cc     = fix(cc)
         self.owner  = fix(owner)
 
+        self.key = self.ip
+
     def __str__(self):
         return "%-10s %-16s %-16s %s '%s'" % (self.asn, self.ip, self.prefix, self.cc, self.owner)
     def __repr__(self):
         return "<%s instance: %s|%s|%s|%s|%s>" % (self.__class__, self.asn, self.ip, self.prefix, self.cc, self.owner)
+
+class asrecord:
+    def __init__(self, asn, cc, owner):
+
+        def fix(x):
+            x = x.strip()
+            if x == "NA":
+                return None
+            return str(x.decode('ascii','ignore'))
+
+        self.asn    = fix(asn)
+        self.cc     = fix(cc)
+        self.owner  = fix(owner)
+
+        self.key = "AS" + self.asn
+
+    def __str__(self):
+        return "%-10s %s '%s'" % (self.asn, self.cc, self.owner)
+    def __repr__(self):
+        return "<%s instance: %s|%s|%s>" % (self.__class__, self.asn, self.cc, self.owner)
 
 class Client:
     """Python interface to whois.cymru.com
@@ -82,7 +104,11 @@ class Client:
     GOOGLE - Google Inc.
     MICROSOFT-CORP---MSN-AS-BLOCK - Microsoft Corp
     """
-    KEY_FMT = "cymruwhois:ip:%s"
+    def make_key(self, arg):
+        if arg.startswith("AS"):
+            return "cymruwhois:as:" + arg
+        else:
+            return "cymruwhois:ip:" + arg
 
     def __init__(self, host="whois.cymru.com", port=43, memcache_host='localhost:11211'):
         self.host=host
@@ -96,7 +122,7 @@ class Client:
         self.socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.socket.settimeout(5.0)
         self.socket.connect((self.host,self.port))
-        self.socket.settimeout(1.0)
+        self.socket.settimeout(4.0)
         self.file = self.socket.makefile()
     def _sendline(self, line):
         self.file.write(line + "\r\n")
@@ -124,9 +150,7 @@ class Client:
         self._connect()
         self._sendline("BEGIN")
         self._readline() #discard the message "Bulk mode; one IP per line. [2005-08-02 18:54:55 GMT]"
-        self._sendline("PREFIX")
-        self._sendline("COUNTRYCODE")
-        self._sendline("NOTRUNC")
+        self._sendline("PREFIX\nASNUMBER\nCOUNTRYCODE\nNOTRUNC")
         self._connected=True
 
     def disconnect(self):
@@ -140,7 +164,7 @@ class Client:
     def get_cached(self, ips):
         if not self.c:
             return {}
-        keys = [self.KEY_FMT % ip for ip in ips]
+        keys = [self.make_key(ip) for ip in ips]
         vals = self.c.get_multi(keys)
         #convert cymruwhois:ip:1.2.3.4 into just 1.2.3.4
         return dict((k.split(":")[-1], v) for k,v in vals.items())
@@ -148,7 +172,7 @@ class Client:
     def cache(self, r):
         if not self.c:
             return
-        self.c.set(self.KEY_FMT % r.ip, r, 60*60*6)
+        self.c.set(self.make_key(r.key), r, 60*60*6)
 
     def lookup(self, ip):
         """Look up a single address. 
@@ -169,7 +193,7 @@ class Client:
             #print "cached:%d not_cached:%d" % (len(cached), len(not_cached))
             if not_cached:
                 for rec in self._lookupmany_raw(not_cached):
-                    cached[rec.ip] = rec
+                    cached[rec.key] = rec
             for ip in batch:
                 if ip in cached:
                     yield cached[ip]
@@ -196,11 +220,14 @@ class Client:
                 need -=1
                 continue
             parts=result.split("|")
-            r=record(*parts)
+            if len(parts)==5:
+                r=record(*parts)
+            else:
+                r=asrecord(*parts)
 
             #check for multiple records being returned for a single IP
             #in this case, just skip any extra records
-            if last and r.ip == last.ip:
+            if last and r.key == last.key:
                 continue
 
             self.cache(r)

@@ -2,7 +2,7 @@ from setuptools import setup
 from glob import glob
 
 setup(name="cymruwhois",
-    version="1.0",
+    version="1.1",
     description="Client for the whois.cymru.com service",
     long_description="""
 Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
