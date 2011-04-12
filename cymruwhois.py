@@ -122,7 +122,7 @@ class Client:
         self.socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.socket.settimeout(5.0)
         self.socket.connect((self.host,self.port))
-        self.socket.settimeout(4.0)
+        self.socket.settimeout(10.0)
         self.file = self.socket.makefile()
     def _sendline(self, line):
         self.file.write(line + "\r\n")
