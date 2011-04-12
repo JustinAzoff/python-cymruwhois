@@ -36,6 +36,8 @@ Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
     py_modules = ["cymruwhois"], 
     extras_require = {
         'CACHE':  ["python-memcached"],
+        'docs' : ['sphinx'],
+        'tests' : ['nose'],
     },
     entry_points = {
         'console_scripts': [
@@ -43,8 +45,6 @@ Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
         ]
     },
     setup_requires=[
-        "nose",
-        "sphinx",
     ],
     test_suite='nose.collector',
 )
