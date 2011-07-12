@@ -140,7 +140,7 @@ class Client:
             try :
                 self.file.read(1024)
             except socket.error, e:
-                if e.args[0]!=errno.EAGAIN:
+                if e.args[0] not in (errno.EAGAIN, errno.EWOULDBLOCK):
                     raise
         finally:
             self.socket.setblocking(1)
