@@ -119,7 +119,7 @@ class Client:
             self.c = memcache.Client([memcache_host])
 
     def _connect(self):
-        self.socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.socket=socket.socket()
         self.socket.settimeout(5.0)
         self.socket.connect((self.host,self.port))
         self.socket.settimeout(10.0)
