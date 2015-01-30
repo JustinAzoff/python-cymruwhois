@@ -96,13 +96,13 @@ class Client:
     >>> print r.asn
     15169
     >>> print r.owner
-    GOOGLE - Google Inc.
+    GOOGLE - Google Inc.,US
     >>> 
     >>> ip_ms = socket.gethostbyname("www.microsoft.com")
     >>> for r in c.lookupmany([ip, ip_ms]):
     ...     print r.owner
-    GOOGLE - Google Inc.
-    MICROSOFT-CORP---MSN-AS-BLOCK - Microsoft Corp
+    GOOGLE - Google Inc.,US
+    AKAMAI-ASN1 Akamai International B.V.,US
     """
     def make_key(self, arg):
         if arg.startswith("AS"):
