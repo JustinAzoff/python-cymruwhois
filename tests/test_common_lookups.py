@@ -21,5 +21,5 @@ def test_asn():
 def common_case(client, hostname, owner):
     ip = socket.gethostbyname(hostname)
     r=client.lookup(ip)
-    print owner, r.owner.lower()
+    print(owner, r.owner.lower())
     assert owner in r.owner.lower()

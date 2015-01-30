@@ -46,9 +46,11 @@ class record:
 
         def fix(x):
             x = x.strip()
-            if x == "NA":
-                return None
-            return str(x.decode('ascii','ignore'))
+            try:
+                x = str(x.decode('ascii','ignore'))
+            except AttributeError:
+                pass # for Python 3
+            return x
 
         self.asn    = fix(asn)
         self.ip     = fix(ip)
@@ -70,7 +72,11 @@ class asrecord:
             x = x.strip()
             if x == "NA":
                 return None
-            return str(x.decode('ascii','ignore'))
+            try:
+                x = str(x.decode('ascii','ignore'))
+            except AttributeError:
+                pass # for Python 3
+            return x
 
         self.asn    = fix(asn)
         self.cc     = fix(cc)
@@ -93,14 +99,14 @@ class Client:
     >>> from cymruwhois import Client
     >>> c=Client()
     >>> r=c.lookup(ip)
-    >>> print r.asn
+    >>> print(r.asn)
     15169
-    >>> print r.owner
+    >>> print(r.owner)
     GOOGLE - Google Inc.,US
     >>> 
     >>> ip_ms = socket.gethostbyname("www.microsoft.com")
     >>> for r in c.lookupmany([ip, ip_ms]):
-    ...     print r.owner
+    ...     print(r.owner)
     GOOGLE - Google Inc.,US
     AKAMAI-ASN1 Akamai International B.V.,US
     """
@@ -123,7 +129,7 @@ class Client:
         self.socket.settimeout(5.0)
         self.socket.connect((self.host,self.port))
         self.socket.settimeout(10.0)
-        self.file = self.socket.makefile()
+        self.file = self.socket.makefile("rw")
     def _sendline(self, line):
         self.file.write(line + "\r\n")
         self.file.flush()
@@ -139,7 +145,7 @@ class Client:
         try :
             try :
                 self.file.read(1024)
-            except socket.error, e:
+            except socket.error as e:
                 if e.args[0] not in (errno.EAGAIN, errno.EWOULDBLOCK):
                     raise
         finally:
@@ -167,7 +173,7 @@ class Client:
         keys = [self.make_key(ip) for ip in ips]
         vals = self.c.get_multi(keys)
         #convert cymruwhois:ip:1.2.3.4 into just 1.2.3.4
-        return dict((k.split(":")[-1], v) for k,v in vals.items())
+        return dict((k.split(":")[-1], v) for k,v in list(vals.items()))
 
     def cache(self, r):
         if not self.c:
@@ -296,7 +302,7 @@ def lookup_stdin():
         ip=line.strip()
         ips.append(ip)
     for r in c.lookupmany(ips):
-        print format % r.__dict__
+        print(format % r.__dict__)
 
 if __name__ == "__main__":
     lookup_stdin()

@@ -14,12 +14,18 @@ class FakeFile:
         return
     def readline(self):
         try :
-            return self.iter.next()
+            try:
+              return self.iter.next()
+            except AttributeError:
+              return self.iter.__next__() # for Python 3
         except StopIteration:
             raise socket.error(errno.EAGAIN, 'bleh')
     def read(self, bytes):
         try :
-            return self.iter.next()
+            try:            
+              return self.iter.next()
+            except AttributeError:
+              return self.iter.__next__() # for Python 3
         except StopIteration:
             raise socket.error(errno.EAGAIN, 'bleh')
 
