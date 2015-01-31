@@ -5,8 +5,7 @@ def test_common():
     l=cymruwhois.Client()
     places = [
         ['www.google.com',    'google'],
-        ['www.microsoft.com', 'microsoft'],
-        #['www.apple.com',     'apple'],
+        ['www.yahoo.com',     'yahoo'],
         ['www.albany.edu',    'albany'],
     ]
 

@@ -104,11 +104,11 @@ class Client:
     >>> print(r.owner)
     GOOGLE - Google Inc.,US
     >>> 
-    >>> ip_ms = socket.gethostbyname("www.microsoft.com")
+    >>> ip_ms = socket.gethostbyname("www.yahoo.com")
     >>> for r in c.lookupmany([ip, ip_ms]):
     ...     print(r.owner)
     GOOGLE - Google Inc.,US
-    AKAMAI-ASN1 Akamai International B.V.,US
+    YAHOO-3 - Yahoo!,US
     """
     def make_key(self, arg):
         if arg.startswith("AS"):
