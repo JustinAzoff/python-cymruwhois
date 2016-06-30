@@ -32,7 +32,7 @@ Perform lookups by ip address and return ASN, Country Code, and Netblock Owner::
     ],
     keywords='ASN',
     author="Justin Azoff",
-    author_email="JAzoff@uamail.albany.edu",
+    author_email="justin@bouncybouncy.net",
     py_modules = ["cymruwhois"], 
     extras_require = {
         'CACHE':  ["python-memcached"],
