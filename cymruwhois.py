@@ -145,7 +145,8 @@ class Client:
             try :
                 self.file.read(1024)
             except socket.error as e:
-                if e.args[0] not in (errno.EAGAIN, errno.EWOULDBLOCK):
+                #10035 is WSAEWOULDBLOCK for windows systems on older python versions
+                if e.args[0] not in (errno.EAGAIN, errno.EWOULDBLOCK, 10035):
                     raise
         finally:
             self.socket.setblocking(1)
